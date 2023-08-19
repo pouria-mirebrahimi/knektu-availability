@@ -1,4 +1,4 @@
-import { IButton } from './interface/button.interface';
+import { IButton } from '../../interface/button.interface';
 
 export class WindowsButton implements IButton {
   render(): void {

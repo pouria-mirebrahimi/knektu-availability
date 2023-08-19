@@ -1,4 +1,4 @@
-import { Dialog } from './abstract/dialog';
+import { Dialog } from './dialog';
 import { IButton } from './interface/button.interface';
 import { WindowsButton } from './win-button';
 
