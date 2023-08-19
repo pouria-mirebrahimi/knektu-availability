@@ -18,3 +18,5 @@ export interface DiaryInitializationDto {
 
 export type InitDataOnceAvailability = DiaryInitializationDto;
 export type InitDataDailyAvailability = DiaryInitializationDto;
+export type InitDataCustomAvailability = DiaryInitializationDto;
+export type InitDataWeeklyAvailability = DiaryInitializationDto;
