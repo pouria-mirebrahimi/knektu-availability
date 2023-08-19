@@ -1,7 +1,7 @@
 import moment from 'moment-timezone';
-import { WindowsDialog } from './model/dialog/win-dialog';
-import { WebDialog } from './model/dialog/web-dialog';
-import { Dialog } from './model/dialog/abstract/dialog';
+import { OnceAvailability } from './model/availability/instance/once/once-avail';
+import { DiaryStatus } from './model/availability/enum/diary.enum';
+import { InitDataOnceAvailability } from './model/availability/interface/diary.interface';
 
 const dateTime = moment.tz(
   'May 30th 2023 8:30PM',
@@ -10,8 +10,11 @@ const dateTime = moment.tz(
 );
 console.log(moment().startOf('minutes').from(dateTime));
 
-const webDialog: Dialog = new WebDialog();
-webDialog.render();
+const dataForOnce: InitDataOnceAvailability = {
+  status: DiaryStatus.ACTIVE,
+  dates: ['2023-08-19'],
+  time: { startTime: '12:30', endTime: '13:00' },
+};
 
-const windowsDialog: Dialog = new WindowsDialog();
-windowsDialog.render();
+const onceAvailability = new OnceAvailability(dataForOnce);
+onceAvailability.getDiaries();
