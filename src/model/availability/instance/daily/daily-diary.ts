@@ -1,5 +1,5 @@
 import { DiaryStatus, DiaryType } from '../../enum/diary.enum';
-import { IDateTime } from '../../interface/datetime.interface';
+import { IDate, IDateTime, ITime } from '../../interface/datetime.interface';
 import { InitDataDailyAvailability } from '../../interface/diary.interface';
 import { IDiary } from '../../interface/diary.interface';
 
@@ -8,24 +8,28 @@ export class DailyDiary implements IDiary {
   readonly type: DiaryType = DiaryType.DAILY;
 
   private status: DiaryStatus;
-  private startDateTime: IDateTime;
-  private endDateTime: IDateTime;
+  private startDate: IDate;
+  private endDate: IDate;
+  private time: ITime;
 
   validate(): void {
     console.log('Daily Diary is valid.');
   }
 
   log(): void {
-    console.log(this.type, 'availability');
+    console.log('type: ', this.type);
     console.log('Status: ', this.status);
-    console.log('startTime: ', this.startDateTime);
-    console.log('endTime: ', this.endDateTime);
+    console.log('startDate: ', this.startDate);
+    console.log('endDate: ', this.endDate);
+    console.log('time: ', this.time);
   }
 
   setDiaryData(data: InitDataDailyAvailability): void {
     const { status, dates, time } = data;
+    console.log('data');
     this.status = status;
-    this.startDateTime = { date: dates[0], time };
-    this.endDateTime = { date: dates[0], time };
+    this.startDate = dates[0];
+    this.endDate = dates[1];
+    this.time = time;
   }
 }

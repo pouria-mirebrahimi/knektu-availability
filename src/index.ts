@@ -1,7 +1,11 @@
 import moment from 'moment-timezone';
 import { OnceAvailability } from './model/availability/instance/once/once-avail';
 import { DiaryStatus } from './model/availability/enum/diary.enum';
-import { InitDataOnceAvailability } from './model/availability/interface/diary.interface';
+import {
+  InitDataDailyAvailability,
+  InitDataOnceAvailability,
+} from './model/availability/interface/diary.interface';
+import { DailyAvailability } from './model/availability/instance/daily/daily-avail';
 
 const dateTime = moment.tz(
   'May 30th 2023 8:30PM',
@@ -18,3 +22,12 @@ const dataForOnce: InitDataOnceAvailability = {
 
 const onceAvailability = new OnceAvailability(dataForOnce);
 onceAvailability.getDiaries();
+
+const dataForDaily: InitDataDailyAvailability = {
+  status: DiaryStatus.ACTIVE,
+  dates: ['2023-08-19', '2023-08-25'],
+  time: { startTime: '12:30', endTime: '13:00' },
+};
+
+const dailyAvailability = new DailyAvailability(dataForDaily);
+dailyAvailability.getDiaries();

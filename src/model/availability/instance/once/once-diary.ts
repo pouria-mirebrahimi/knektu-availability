@@ -15,9 +15,9 @@ export class OnceDiary implements IDiary {
   }
 
   log(): void {
-    console.log(this.type, 'availability');
+    console.log('type: ', this.type);
     console.log('Status: ', this.status);
-    console.log('data: ', this.date);
+    console.log('availability: ', this.date);
   }
 
   setDiaryData(data: InitDataOnceAvailability): void {
