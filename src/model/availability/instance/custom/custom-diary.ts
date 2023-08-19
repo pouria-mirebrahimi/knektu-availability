@@ -1,7 +1,7 @@
 import { DiaryStatus, DiaryType } from '../../enum/diary.enum';
 import { IDate, IDateTime, ITime } from '../../interface/datetime.interface';
 import { IDiary } from '../../interface/diary.interface';
-import { DiaryInitializationDto } from '../../interface/diary.interface';
+import { IDiaryInitialization } from '../../interface/diary.interface';
 
 export class CustomDiary implements IDiary {
   readonly type: DiaryType = DiaryType.CUSTOM;
@@ -22,7 +22,7 @@ export class CustomDiary implements IDiary {
     console.log('time: ', this.time);
   }
 
-  setDiaryData(data: DiaryInitializationDto) {
+  setDiaryData(data: IDiaryInitialization) {
     const { status, dates, time } = data;
     this.status = status;
     this.dates = dates;

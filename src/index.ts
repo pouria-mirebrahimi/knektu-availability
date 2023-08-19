@@ -40,7 +40,7 @@ dailyAvailability.getDiaries();
 const dataForCustom: InitDataCustomAvailability = {
   status: DiaryStatus.ACTIVE,
   dates: ['2023-09-10', '2023-09-12', '2023-09-15'],
-  time: { startTime: '8:00', endTime: '21:00' },
+  time: { startTime: '08:00', endTime: '21:00' },
 };
 
 const customAvailability = new CustomAvailability(dataForCustom);
@@ -50,7 +50,7 @@ customAvailability.getDiaries();
 const dataForWeekly: InitDataWeeklyAvailability = {
   status: DiaryStatus.ACTIVE,
   dates: ['2023-09-10', '2023-09-15'],
-  time: { startTime: '8:00', endTime: '21:00' },
+  time: { startTime: '08:00', endTime: '21:00' },
 };
 
 const weeklyAvailability = new WeeklyAvailability(dataForWeekly);

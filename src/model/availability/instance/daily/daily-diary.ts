@@ -26,7 +26,6 @@ export class DailyDiary implements IDiary {
 
   setDiaryData(data: InitDataDailyAvailability): void {
     const { status, dates, time } = data;
-    console.log('data');
     this.status = status;
     this.startDate = dates[0];
     this.endDate = dates[1];
