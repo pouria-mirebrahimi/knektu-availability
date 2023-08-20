@@ -1,14 +1,12 @@
-import { Availability } from '../../availability';
-import {
-  IDiary,
-  InitDataOnceAvailability,
-} from '../../interface/diary.interface';
 import { OnceDiary } from './once-diary';
+import { Availability } from '../availability';
+import { IDiary } from '../interface/diary.interface';
+import { InitDataOnceAvailability } from '../interface/diary.interface';
 
 export class OnceAvailability extends Availability {
   protected createInstance(data: InitDataOnceAvailability): IDiary {
     const instance = new OnceDiary();
-    instance.setDiaryData(data);
+    instance.fill(data);
 
     return instance;
   }

@@ -1,22 +1,22 @@
 import { DiaryStatus, DiaryType } from '../enum/diary.enum';
 import { IDate, IDateTime, ITime } from './datetime.interface';
+import { Operation } from './operation.interface';
 
 export interface IDiary {
   type: DiaryType;
   details: IDateTime[];
 
-  validate(): void;
-  log(): void;
-  setDiaryData(data: DiaryInitializationDto);
+  execute(operation: Operation): void;
+  fill(data: IDiaryInitialization): void;
 }
 
-export interface DiaryInitializationDto {
+export interface IDiaryInitialization {
   status: DiaryStatus;
   dates: IDate[];
   time: ITime;
 }
 
-export type InitDataOnceAvailability = DiaryInitializationDto;
-export type InitDataDailyAvailability = DiaryInitializationDto;
-export type InitDataCustomAvailability = DiaryInitializationDto;
-export type InitDataWeeklyAvailability = DiaryInitializationDto;
+export type InitDataOnceAvailability = IDiaryInitialization;
+export type InitDataDailyAvailability = IDiaryInitialization;
+export type InitDataCustomAvailability = IDiaryInitialization;
+export type InitDataWeeklyAvailability = IDiaryInitialization;
