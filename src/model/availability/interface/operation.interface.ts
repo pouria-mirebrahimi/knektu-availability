@@ -1,7 +1,7 @@
-import { CustomDiary } from '../diary/custom-diary';
-import { DailyDiary } from '../diary/daily-diary';
-import { OnceDiary } from '../diary/once-diary';
-import { WeeklyDiary } from '../diary/weekly-diary';
+import { CustomDiary } from '../diary/custom';
+import { DailyDiary } from '../diary/daily';
+import { OnceDiary } from '../diary/once';
+import { WeeklyDiary } from '../diary/weekly';
 
 export interface Operation {
   apply(diary: OnceDiary): void;

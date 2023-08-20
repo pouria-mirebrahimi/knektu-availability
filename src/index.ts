@@ -1,10 +1,10 @@
 import moment from 'moment-timezone';
 import { DiaryStatus } from './model/availability/enum/diary.enum';
 import { IDiaryInitialization } from './model/availability/interface/diary.interface';
-import { OnceAvailability } from './model/availability/diary/once-avail';
-import { DailyAvailability } from './model/availability/diary/daily-avail';
-import { CustomAvailability } from './model/availability/diary/custom-avail';
-import { WeeklyAvailability } from './model/availability/diary/weekly-avail';
+import { OnceAvailability } from './model/availability/once';
+import { DailyAvailability } from './model/availability/daily';
+import { CustomAvailability } from './model/availability/custom';
+import { WeeklyAvailability } from './model/availability/weekly';
 
 const dateTime = moment.tz(
   'May 30th 2023 8:30PM',
