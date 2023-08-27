@@ -4,10 +4,16 @@ import { Operation } from './operation.interface';
 
 export interface IDiary {
   type: DiaryType;
-  details: IDateTime[];
+  diaries: IDateTime[];
 
   execute(operation: Operation): void;
   fill(data: IDiaryInitialization): void;
+
+  set momentDates(values: moment.Moment[]);
+  get momentDates(): moment.Moment[];
+  get status(): DiaryStatus;
+  get rawDates(): IDate[];
+  get rawTimes(): ITime;
 }
 
 export interface IDiaryInitialization {

@@ -6,12 +6,13 @@ import { Operation } from '../interface/operation.interface';
 
 export class WeeklyDiary implements IDiary {
   type: DiaryType = DiaryType.WEEKLY;
-  details: IDateTime[];
+  public diaries: IDateTime[];
 
-  public status: DiaryStatus;
-  public startDate: IDate;
-  public endDate: IDate;
-  public time: ITime;
+  #status_: DiaryStatus;
+  #date_: IDate[];
+  #time_: ITime;
+
+  #dateTimes_: moment.Moment[];
 
   execute(operation: Operation): void {
     operation.apply(this);
@@ -19,9 +20,27 @@ export class WeeklyDiary implements IDiary {
 
   fill(data: InitDataWeeklyAvailability) {
     const { status, dates, time } = data;
-    this.status = status;
-    this.startDate = dates[0];
-    this.endDate = dates[1];
-    this.time = time;
+    this.#status_ = status;
+    this.#date_ = dates;
+    this.#time_ = time;
+  }
+  public set momentDates(values: moment.Moment[]) {
+    this.#dateTimes_ = values;
+  }
+
+  public get momentDates(): moment.Moment[] {
+    return this.#dateTimes_;
+  }
+
+  public get status(): DiaryStatus {
+    return this.#status_;
+  }
+
+  public get rawDates(): IDate[] {
+    return this.#date_;
+  }
+
+  public get rawTimes(): ITime {
+    return this.#time_;
   }
 }

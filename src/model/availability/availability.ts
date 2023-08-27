@@ -5,19 +5,18 @@ import { DiaryReport } from './operation/diary-report';
 import { IDateTime } from './interface/datetime.interface';
 
 export abstract class Availability {
-  private _diary: IDiary;
-
+  #diary_: IDiary;
   protected abstract createInstance(data: IDiaryInitialization): IDiary;
 
   constructor(data: IDiaryInitialization) {
-    this._diary = this.createInstance(data);
+    this.#diary_ = this.createInstance(data);
   }
 
-  public diaries(): IDateTime[] {
-    this._diary.execute(new DiaryValidation());
-    this._diary.execute(new DiaryGeneration());
-    this._diary.execute(new DiaryReport());
+  public diary(): IDateTime[] {
+    this.#diary_.execute(new DiaryValidation());
+    this.#diary_.execute(new DiaryGeneration());
+    this.#diary_.execute(new DiaryReport());
 
-    return this._diary.details;
+    return this.#diary_.diaries;
   }
 }

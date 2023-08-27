@@ -19,12 +19,12 @@ console.log(moment().startOf('minutes').from(dateTime));
 const dataForOnce: IDiaryInitialization = {
   status: DiaryStatus.ACTIVE,
   dates: ['2023-08-19'],
-  time: { startTime: '12:30', endTime: '13:00' },
+  time: { startTime: '21:00', endTime: '01:00' },
 };
 
 const onceAvailability = new OnceAvailability(dataForOnce);
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const onceDiaries = onceAvailability.diaries();
+const onceDiaries = onceAvailability.diary();
+console.log(onceDiaries);
 
 /// <------------------------------------------------------>
 
@@ -36,8 +36,8 @@ const dataForDaily: IDiaryInitialization = {
 };
 
 const dailyAvailability = new DailyAvailability(dataForDaily);
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const dailyDiaries = dailyAvailability.diaries();
+const dailyDiaries = dailyAvailability.diary();
+console.log(dailyDiaries);
 
 /// <------------------------------------------------------>
 
@@ -49,8 +49,8 @@ const dataForCustom: IDiaryInitialization = {
 };
 
 const customAvailability = new CustomAvailability(dataForCustom);
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const customDiaries = customAvailability.diaries();
+const customDiaries = customAvailability.diary();
+console.log(customDiaries);
 
 /// <------------------------------------------------------>
 
@@ -62,5 +62,5 @@ const dataForWeekly: IDiaryInitialization = {
 };
 
 const weeklyAvailability = new WeeklyAvailability(dataForWeekly);
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const weeklyDiaries = weeklyAvailability.diaries();
+const weeklyDiaries = weeklyAvailability.diary();
+console.log(weeklyDiaries);
