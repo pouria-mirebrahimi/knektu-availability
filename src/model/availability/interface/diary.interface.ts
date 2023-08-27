@@ -1,5 +1,5 @@
 import { DiaryStatus, DiaryType } from '../enum/diary.enum';
-import { IDate, IDateTime, ITime } from './datetime.interface';
+import { IDate, IDateTime, ISingleDay, ITime } from './datetime.interface';
 import { Operation } from './operation.interface';
 
 export interface IDiary {
@@ -9,8 +9,8 @@ export interface IDiary {
   execute(operation: Operation): void;
   fill(data: IDiaryInitialization): void;
 
-  set momentDates(values: moment.Moment[]);
-  get momentDates(): moment.Moment[];
+  set momentDates(values: ISingleDay[]);
+  get momentDates(): ISingleDay[];
   get status(): DiaryStatus;
   get rawDates(): IDate[];
   get rawTimes(): ITime;

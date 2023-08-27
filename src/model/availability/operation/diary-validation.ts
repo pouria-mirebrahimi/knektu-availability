@@ -19,6 +19,7 @@ export class DiaryValidation implements Operation {
     const dates: IDate[] = diary.rawDates;
     const { startTime }: ITime = diary.rawTimes;
 
+    // TODO check the dates count
     this.checkDatesOrder(dates);
     this.checkPastDate(dates.at(0), startTime);
   }

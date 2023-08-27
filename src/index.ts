@@ -19,7 +19,7 @@ console.log(moment().startOf('minutes').from(dateTime));
 const dataForOnce: IDiaryInitialization = {
   status: DiaryStatus.ACTIVE,
   dates: ['2023-10-19'],
-  time: { startTime: '21:00', endTime: '01:00' },
+  time: { startTime: '08:00', endTime: '01:00' },
 };
 
 const onceAvailability = new OnceAvailability(dataForOnce);
@@ -32,7 +32,7 @@ console.log(onceDiaries);
 const dataForDaily: IDiaryInitialization = {
   status: DiaryStatus.ACTIVE,
   dates: ['2023-10-19', '2023-10-25'],
-  time: { startTime: '12:30', endTime: '23:30' },
+  time: { startTime: '12:30', endTime: '21:30' },
 };
 
 const dailyAvailability = new DailyAvailability(dataForDaily);
@@ -57,8 +57,8 @@ console.log(customDiaries);
 /// NOTE - Weekly availability
 const dataForWeekly: IDiaryInitialization = {
   status: DiaryStatus.ACTIVE,
-  dates: ['2023-10-10', '2023-10-12'],
-  time: { startTime: '08:00', endTime: '01:00' },
+  dates: ['2023-10-10', '2023-11-12'],
+  time: { startTime: '08:00', endTime: '22:00' },
 };
 
 const weeklyAvailability = new WeeklyAvailability(dataForWeekly);

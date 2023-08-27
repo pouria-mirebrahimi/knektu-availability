@@ -9,3 +9,8 @@ export interface ITime {
   startTime: string;
   endTime: string;
 }
+
+export interface ISingleDay {
+  from: moment.Moment;
+  to: moment.Moment;
+}

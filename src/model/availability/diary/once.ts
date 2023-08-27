@@ -1,5 +1,5 @@
-import moment from 'moment-timezone';
 import { DiaryStatus, DiaryType } from '../enum/diary.enum';
+import { ISingleDay } from '../interface/datetime.interface';
 import { IDate, IDateTime, ITime } from '../interface/datetime.interface';
 import { IDiary } from '../interface/diary.interface';
 import { InitDataOnceAvailability } from '../interface/diary.interface';
@@ -13,7 +13,7 @@ export class OnceDiary implements IDiary {
   #date_: IDate[];
   #time_: ITime;
 
-  #dateTimes_: moment.Moment[];
+  #dateTimes_: ISingleDay[];
 
   execute(operation: Operation): void {
     operation.apply(this);
@@ -26,11 +26,11 @@ export class OnceDiary implements IDiary {
     this.#time_ = time;
   }
 
-  public set momentDates(values: moment.Moment[]) {
+  public set momentDates(values: ISingleDay[]) {
     this.#dateTimes_ = values;
   }
 
-  public get momentDates(): moment.Moment[] {
+  public get momentDates(): ISingleDay[] {
     return this.#dateTimes_;
   }
 

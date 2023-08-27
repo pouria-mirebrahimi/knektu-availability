@@ -1,5 +1,6 @@
 import { DiaryStatus, DiaryType } from '../enum/diary.enum';
 import { IDate, IDateTime, ITime } from '../interface/datetime.interface';
+import { ISingleDay } from '../interface/datetime.interface';
 import { InitDataWeeklyAvailability } from '../interface/diary.interface';
 import { IDiary } from '../interface/diary.interface';
 import { Operation } from '../interface/operation.interface';
@@ -12,7 +13,7 @@ export class WeeklyDiary implements IDiary {
   #date_: IDate[];
   #time_: ITime;
 
-  #dateTimes_: moment.Moment[];
+  #dateTimes_: ISingleDay[];
 
   execute(operation: Operation): void {
     operation.apply(this);
@@ -24,11 +25,17 @@ export class WeeklyDiary implements IDiary {
     this.#date_ = dates;
     this.#time_ = time;
   }
-  public set momentDates(values: moment.Moment[]) {
+
+  public pushMomentDate(date: ISingleDay): void {
+    if (!!this.#dateTimes_) this.#dateTimes_.push(date);
+    else this.#dateTimes_ = [date];
+  }
+
+  public set momentDates(values: ISingleDay[]) {
     this.#dateTimes_ = values;
   }
 
-  public get momentDates(): moment.Moment[] {
+  public get momentDates(): ISingleDay[] {
     return this.#dateTimes_;
   }
 
