@@ -5,6 +5,8 @@ import { OnceDiary } from '../diary/once';
 import { WeeklyDiary } from '../diary/weekly';
 import { IDate, ITime } from '../interface/datetime.interface';
 import { getMomentDateTime, isPast } from '../utils/moment-util';
+import { DiaryType } from '../enum/diary.enum';
+import { validateDateFormat, validateTimeFormat } from '../utils/format-util';
 
 export class DiaryValidation implements Operation {
   apply(diary: OnceDiary): void;
@@ -17,11 +19,35 @@ export class DiaryValidation implements Operation {
 
   private diaryValidation(diary: OnceDiary) {
     const dates: IDate[] = diary.rawDates;
-    const { startTime }: ITime = diary.rawTimes;
+    const { startTime, endTime }: ITime = diary.rawTimes;
 
-    // TODO check the dates count
+    this.checkValidFormat(dates, startTime, endTime);
+    this.checkDatesCount(diary.type, dates?.length);
     this.checkDatesOrder(dates);
     this.checkPastDate(dates.at(0), startTime);
+  }
+
+  private checkValidFormat(dates: IDate[], startTime: string, endTime: string) {
+    validateDateFormat(dates);
+    validateTimeFormat([startTime, endTime]);
+  }
+
+  private checkDatesCount(type: DiaryType, length: number) {
+    switch (type) {
+      case DiaryType.ONCE:
+        if (length !== 1)
+          throw new Error(
+            `Invalid number of date records, wanted 1, got ${length}.`,
+          );
+        break;
+      case DiaryType.DAILY:
+      case DiaryType.WEEKLY:
+        if (length !== 2)
+          throw new Error(
+            `Invalid number of date records, wanted 2, got ${length}.`,
+          );
+        break;
+    }
   }
 
   private checkDatesOrder(dates: IDate[]) {
