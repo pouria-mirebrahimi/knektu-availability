@@ -11,7 +11,10 @@ export interface IDiary {
 
   set momentDates(values: ISingleDay[]);
   get momentDates(): ISingleDay[];
+
   get status(): DiaryStatus;
+  set status(status: DiaryStatus);
+
   get rawDates(): IDate[];
   get rawTimes(): ITime;
 }

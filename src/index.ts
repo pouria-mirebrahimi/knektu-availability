@@ -23,7 +23,7 @@ const dataForOnce: IDiaryInitialization = {
 };
 
 const onceAvailability = new OnceAvailability(dataForOnce);
-const onceDiaries = onceAvailability.diary();
+const onceDiaries = onceAvailability.diaries;
 console.log(onceDiaries);
 
 /// <------------------------------------------------------>
@@ -36,7 +36,7 @@ const dataForDaily: IDiaryInitialization = {
 };
 
 const dailyAvailability = new DailyAvailability(dataForDaily);
-const dailyDiaries = dailyAvailability.diary();
+const dailyDiaries = dailyAvailability.diaries;
 console.log(dailyDiaries);
 
 /// <------------------------------------------------------>
@@ -49,7 +49,7 @@ const dataForCustom: IDiaryInitialization = {
 };
 
 const customAvailability = new CustomAvailability(dataForCustom);
-const customDiaries = customAvailability.diary();
+const customDiaries = customAvailability.diaries;
 console.log(customDiaries);
 
 /// <------------------------------------------------------>
@@ -62,5 +62,5 @@ const dataForWeekly: IDiaryInitialization = {
 };
 
 const weeklyAvailability = new WeeklyAvailability(dataForWeekly);
-const weeklyDiaries = weeklyAvailability.diary();
+const weeklyDiaries = weeklyAvailability.diaries;
 console.log(weeklyDiaries);
