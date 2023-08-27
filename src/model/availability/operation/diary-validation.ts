@@ -1,9 +1,10 @@
-import moment from 'moment-timezone';
 import { Operation } from '../interface/operation.interface';
 import { CustomDiary } from '../diary/custom';
 import { DailyDiary } from '../diary/daily';
 import { OnceDiary } from '../diary/once';
 import { WeeklyDiary } from '../diary/weekly';
+import { IDate, ITime } from '../interface/datetime.interface';
+import { getMomentDateTime, isPast } from '../utils/moment-util';
 
 export class DiaryValidation implements Operation {
   apply(diary: OnceDiary): void;
@@ -11,22 +12,37 @@ export class DiaryValidation implements Operation {
   apply(diary: WeeklyDiary): void;
   apply(diary: CustomDiary): void;
   apply(diary: any): void {
-    if (diary instanceof OnceDiary) this.onceDiaryValidation(diary);
+    this.diaryValidation(diary);
   }
 
-  private onceDiaryValidation(diary: OnceDiary) {
-    const date = diary.rawDates[0];
-    const { startTime, endTime } = diary.rawTimes;
+  private diaryValidation(diary: OnceDiary) {
+    const dates: IDate[] = diary.rawDates;
+    const { startTime }: ITime = diary.rawTimes;
 
-    const fromDateTime = this.getMomentDateTime(date, startTime);
-    const toDateTime = this.getMomentDateTime(date, endTime);
-    if (fromDateTime >= toDateTime)
-      /// it goes to the next day, after 00:00
-      diary.momentDates = [fromDateTime, toDateTime.add(1, 'day')];
-    else diary.momentDates = [fromDateTime, toDateTime];
+    this.checkDatesOrder(dates);
+    this.checkPastDate(dates.at(0), startTime);
   }
 
-  private getMomentDateTime(date: string, time: string) {
-    return moment.utc(`${date} ${time}`, 'YYYY-MM-DD hh:mm');
+  private checkDatesOrder(dates: IDate[]) {
+    for (const i in dates) {
+      this.compare(dates[+i], dates[+i + 1]);
+    }
+  }
+
+  private checkPastDate(date: IDate, time: string) {
+    const theDate = getMomentDateTime(date, time);
+    if (isPast(theDate)) throw new Error('Starting dateTime is past.');
+  }
+
+  private compare(
+    first: IDate,
+    second: IDate | undefined,
+    message: string = 'Dates are not ordered.',
+  ): void {
+    if (!!second) {
+      const firstDay = getMomentDateTime(first, '00:00');
+      const secondDay = getMomentDateTime(second, '00:00');
+      if (firstDay > secondDay) throw new Error(message);
+    }
   }
 }

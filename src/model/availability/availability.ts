@@ -1,7 +1,7 @@
 import { DiaryGeneration } from './operation/diary-generation';
 import { DiaryValidation } from './operation/diary-validation';
 import { IDiaryInitialization, IDiary } from './interface/diary.interface';
-import { DiaryReport } from './operation/diary-report';
+import { DiaryExtraction } from './operation/diary-extract';
 import { IDateTime } from './interface/datetime.interface';
 
 export abstract class Availability {
@@ -14,8 +14,8 @@ export abstract class Availability {
 
   public diary(): IDateTime[] {
     this.#diary_.execute(new DiaryValidation());
+    this.#diary_.execute(new DiaryExtraction());
     this.#diary_.execute(new DiaryGeneration());
-    this.#diary_.execute(new DiaryReport());
 
     return this.#diary_.diaries;
   }
