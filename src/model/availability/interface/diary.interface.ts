@@ -1,10 +1,10 @@
 import { DiaryStatus, DiaryType } from '../enum/diary.enum';
-import { IDate, IDateTime, ISingleDay, ITime } from './datetime.interface';
+import { IDate, ISingleDay, ITime } from './datetime.interface';
 import { Operation } from './operation.interface';
 
 export interface IDiary {
   type: DiaryType;
-  diaries: IDateTime[];
+  diaries: ISingleDay[];
 
   execute(operation: Operation): void;
   fill(data: IDiaryInitialization): void;

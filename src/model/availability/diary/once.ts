@@ -1,13 +1,13 @@
 import { DiaryStatus, DiaryType } from '../enum/diary.enum';
 import { ISingleDay } from '../interface/datetime.interface';
-import { IDate, IDateTime, ITime } from '../interface/datetime.interface';
+import { IDate, ITime } from '../interface/datetime.interface';
 import { IDiary } from '../interface/diary.interface';
 import { InitDataOnceAvailability } from '../interface/diary.interface';
 import { Operation } from '../interface/operation.interface';
 
 export class OnceDiary implements IDiary {
   readonly type: DiaryType = DiaryType.ONCE;
-  public diaries: IDateTime[];
+  public diaries: ISingleDay[] = [];
 
   #status_: DiaryStatus;
   #date_: IDate[];

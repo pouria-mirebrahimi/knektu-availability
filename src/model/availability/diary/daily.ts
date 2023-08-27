@@ -1,5 +1,5 @@
 import { DiaryStatus, DiaryType } from '../enum/diary.enum';
-import { IDate, IDateTime, ITime } from '../interface/datetime.interface';
+import { IDate, ITime } from '../interface/datetime.interface';
 import { ISingleDay } from '../interface/datetime.interface';
 import { InitDataDailyAvailability } from '../interface/diary.interface';
 import { IDiary } from '../interface/diary.interface';
@@ -7,7 +7,7 @@ import { Operation } from '../interface/operation.interface';
 
 export class DailyDiary implements IDiary {
   readonly type: DiaryType = DiaryType.DAILY;
-  diaries: IDateTime[];
+  diaries: ISingleDay[] = [];
 
   #status_: DiaryStatus;
   #date_: IDate[];

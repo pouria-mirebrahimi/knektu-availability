@@ -1,5 +1,5 @@
 import { DiaryStatus, DiaryType } from '../enum/diary.enum';
-import { IDate, IDateTime, ITime } from '../interface/datetime.interface';
+import { IDate, ITime } from '../interface/datetime.interface';
 import { ISingleDay } from '../interface/datetime.interface';
 import { IDiary } from '../interface/diary.interface';
 import { IDiaryInitialization } from '../interface/diary.interface';
@@ -7,7 +7,7 @@ import { Operation } from '../interface/operation.interface';
 
 export class CustomDiary implements IDiary {
   readonly type: DiaryType = DiaryType.CUSTOM;
-  public diaries: IDateTime[];
+  public diaries: ISingleDay[] = [];
 
   #status_: DiaryStatus;
   #date_: IDate[];
