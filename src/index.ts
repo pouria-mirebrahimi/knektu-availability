@@ -32,7 +32,7 @@ console.log(onceDiaries);
 const dataForDaily: IDiaryInitialization = {
   status: DiaryStatus.ACTIVE,
   dates: ['2023-10-19', '2023-10-20'],
-  time: { startTime: '23:00', endTime: '01:30' },
+  time: { startTime: '23:00', endTime: '00:00' },
 };
 
 const dailyAvailability = new DailyAvailability(dataForDaily);
@@ -45,7 +45,7 @@ console.log(dailyDiaries);
 const dataForCustom: IDiaryInitialization = {
   status: DiaryStatus.ACTIVE,
   dates: ['2023-10-10', '2023-10-12', '2023-10-15'],
-  time: { startTime: '23:30', endTime: '00:30' },
+  time: { startTime: '23:00', endTime: '00:30' },
 };
 
 const customAvailability = new CustomAvailability(dataForCustom);
@@ -57,10 +57,13 @@ console.log(customDiaries);
 /// NOTE - Weekly availability
 const dataForWeekly: IDiaryInitialization = {
   status: DiaryStatus.ACTIVE,
-  dates: ['2023-10-10', '2023-10-19'],
-  time: { startTime: '23:30', endTime: '00:30' },
+  dates: ['2023-10-12', '2023-10-19'],
+  time: { startTime: '22:30', endTime: '23:00' },
 };
 
 const weeklyAvailability = new WeeklyAvailability(dataForWeekly);
 const weeklyDiaries = weeklyAvailability.diaries;
 console.log(weeklyDiaries);
+
+/// NOTE - Check collision between diaries
+console.log(weeklyAvailability.hasCollisionWith(dailyAvailability));
