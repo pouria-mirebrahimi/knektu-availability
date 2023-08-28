@@ -1,17 +1,19 @@
 import { DiaryStatus, DiaryType } from '../enum/diary.enum';
-import { IDate, IDateTime, ITime } from '../interface/datetime.interface';
+import { IDate, ITime } from '../interface/datetime.interface';
+import { ISingleDay } from '../interface/datetime.interface';
 import { InitDataWeeklyAvailability } from '../interface/diary.interface';
 import { IDiary } from '../interface/diary.interface';
 import { Operation } from '../interface/operation.interface';
 
 export class WeeklyDiary implements IDiary {
   type: DiaryType = DiaryType.WEEKLY;
-  details: IDateTime[];
+  public diaries: ISingleDay[] = [];
 
-  public status: DiaryStatus;
-  public startDate: IDate;
-  public endDate: IDate;
-  public time: ITime;
+  #status_: DiaryStatus;
+  #date_: IDate[];
+  #time_: ITime;
+
+  #dateTimes_: ISingleDay[];
 
   execute(operation: Operation): void {
     operation.apply(this);
@@ -19,9 +21,33 @@ export class WeeklyDiary implements IDiary {
 
   fill(data: InitDataWeeklyAvailability) {
     const { status, dates, time } = data;
-    this.status = status;
-    this.startDate = dates[0];
-    this.endDate = dates[1];
-    this.time = time;
+    this.#status_ = status;
+    this.#date_ = dates;
+    this.#time_ = time;
+  }
+
+  public pushMomentDate(date: ISingleDay): void {
+    if (!!this.#dateTimes_) this.#dateTimes_.push(date);
+    else this.#dateTimes_ = [date];
+  }
+
+  public set momentDates(values: ISingleDay[]) {
+    this.#dateTimes_ = values;
+  }
+
+  public get momentDates(): ISingleDay[] {
+    return this.#dateTimes_;
+  }
+
+  public get status(): DiaryStatus {
+    return this.#status_;
+  }
+
+  public get rawDates(): IDate[] {
+    return this.#date_;
+  }
+
+  public get rawTimes(): ITime {
+    return this.#time_;
   }
 }

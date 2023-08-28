@@ -1,6 +1,12 @@
 {
   "include": ["src"],
-  "exclude": ["node_modules"],
+  "exclude": [
+    "node_modules", 
+    "**/*.test.*", 
+    "**/*.spec.*", 
+    "**/__mocks__/*", 
+    "**/__tests__/*"
+  ],
   "extends": "@tsconfig/node18/tsconfig.json",
   "compilerOptions": {
     "module": "commonjs",

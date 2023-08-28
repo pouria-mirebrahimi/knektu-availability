@@ -1,23 +1,43 @@
 import { DiaryGeneration } from './operation/diary-generation';
 import { DiaryValidation } from './operation/diary-validation';
 import { IDiaryInitialization, IDiary } from './interface/diary.interface';
-import { DiaryReport } from './operation/diary-report';
-import { IDateTime } from './interface/datetime.interface';
+import { DiaryExtraction } from './operation/diary-extract';
+import { ISingleDay } from './interface/datetime.interface';
+import { DiaryStatus, DiaryType } from './enum/diary.enum';
+import { collisionUtility } from './utils/collision-util';
 
 export abstract class Availability {
-  private _diary: IDiary;
-
+  #diary_: IDiary;
   protected abstract createInstance(data: IDiaryInitialization): IDiary;
 
   constructor(data: IDiaryInitialization) {
-    this._diary = this.createInstance(data);
+    this.#diary_ = this.createInstance(data);
+    this.preprocessing();
   }
 
-  public diaries(): IDateTime[] {
-    this._diary.execute(new DiaryValidation());
-    this._diary.execute(new DiaryGeneration());
-    this._diary.execute(new DiaryReport());
+  private preprocessing(): void {
+    this.#diary_.execute(new DiaryValidation());
+    this.#diary_.execute(new DiaryExtraction());
+    this.#diary_.execute(new DiaryGeneration());
+  }
 
-    return this._diary.details;
+  public hasCollisionWith(target: Availability): boolean {
+    return collisionUtility(target.#diary_, this.#diary_);
+  }
+
+  public get diaries(): ISingleDay[] {
+    return this.#diary_.diaries;
+  }
+
+  public get status(): DiaryStatus {
+    return this.#diary_.status;
+  }
+
+  public set status(status: DiaryStatus) {
+    this.#diary_.status = status;
+  }
+
+  public get type(): DiaryType {
+    return this.#diary_.type;
   }
 }
