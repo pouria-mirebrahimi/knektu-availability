@@ -14,12 +14,46 @@ describe('Once Diary', () => {
   let onceAvailability: Availability;
   let onceDiaries: ISingleDay[];
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     onceAvailability = new OnceAvailability(dataForOnce);
     onceDiaries = onceAvailability.diaries;
   });
 
-  it('should be defined', () => {
-    expect(onceDiaries.length).toEqual(4);
+  it("module's default export is a class", () => {
+    expect(onceAvailability).toBeInstanceOf(Availability);
+  });
+
+  it("availability's diaries is a list of ISingleDays", () => {
+    expect(onceDiaries).toHaveLength(4);
+  });
+
+  it("first item in the diaries's is a moment date", () => {
+    const firstItem = onceDiaries.at(0);
+    expect(firstItem?.from.toISOString()).toBe('2023-10-19T23:00:00.000Z');
+    expect(firstItem?.to.toISOString()).toBe('2023-10-19T23:30:00.000Z');
+  });
+
+  it('availabilities without collision', () => {
+    const withOutCollisionData: IDiaryInitialization = {
+      status: DiaryStatus.ACTIVE,
+      dates: ['2023-10-19'],
+      time: { startTime: '22:00', endTime: '23:00' },
+    };
+
+    const availability = new OnceAvailability(withOutCollisionData);
+    const hasCollision = onceAvailability.hasCollisionWith(availability);
+    expect(hasCollision).toBe(false);
+  });
+
+  it('availabilities with collision', () => {
+    const withCollisionData: IDiaryInitialization = {
+      status: DiaryStatus.ACTIVE,
+      dates: ['2023-10-19'],
+      time: { startTime: '22:00', endTime: '23:30' },
+    };
+
+    const availability = new OnceAvailability(withCollisionData);
+    const hasCollision = onceAvailability.hasCollisionWith(availability);
+    expect(hasCollision).toBe(true);
   });
 });
