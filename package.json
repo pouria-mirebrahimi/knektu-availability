@@ -16,9 +16,12 @@
     "build:watch": "tsc -w -p tsconfig.json",
     "build:release": "yarn clean && tsc -p tsconfig.release.json",
     "lint": "eslint . --ext .ts --ext .mts",
-    "test": "jest --coverage",
     "prettier": "prettier --config .prettierrc --write .",
-    "test:watch": "jest --watch"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "devDependencies": {
     "@tsconfig/node18": "^2.0.1",
@@ -30,10 +33,14 @@
     "eslint-plugin-prettier": "^5.0.0",
     "prettier": "^3.0.0",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "jest": "^29.6.4",
+    "@types/jest": "^29.5.4",
+    "ts-jest": "^29.1.1"
   },
   "repository": "git@github.com:pouria-mirebrahimi/typescript-boilerplate.git",
   "dependencies": {
-    "moment-timezone": "^0.5.43"
+    "moment-timezone": "^0.5.43",
+    "@golevelup/ts-jest": "^0.3.4"
   }
 }
