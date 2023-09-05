@@ -1,6 +1,6 @@
 import { Availability } from '../src/model/availability/availability';
 import { DiaryStatus } from '../src/model/availability/enum/diary.enum';
-import { ISingleDay } from '../src/model/availability/interface/datetime.interface';
+import { DiaryList } from '../src/model/availability/interface/datetime.interface';
 import { IDiaryInitialization } from '../src/model/availability/interface/diary.interface';
 import { DailyAvailability } from '../src/model/availability/daily';
 
@@ -12,7 +12,7 @@ describe('Daily Diary', () => {
   };
 
   let dailyAvailability: Availability;
-  let dailyDiaries: ISingleDay[];
+  let dailyDiaries: DiaryList;
 
   beforeAll(async () => {
     dailyAvailability = new DailyAvailability(dataForDaily);
@@ -54,6 +54,21 @@ describe('Daily Diary', () => {
 
     const availability = new DailyAvailability(withCollisionData);
     const hasCollision = dailyAvailability.hasCollisionWith(availability);
+    expect(hasCollision).toBe(true);
+  });
+
+  it('availabilities with collision - diary list version', () => {
+    const withCollisionData: IDiaryInitialization = {
+      status: DiaryStatus.ACTIVE,
+      dates: ['2023-10-19', '2023-10-20'],
+      time: { startTime: '23:30', endTime: '01:30' },
+    };
+    const availability = new DailyAvailability(withCollisionData);
+
+    const listOfSingleDateTimes: DiaryList = availability.diaries;
+    const hasCollision = dailyAvailability.hasCollisionWith(
+      listOfSingleDateTimes,
+    );
     expect(hasCollision).toBe(true);
   });
 });

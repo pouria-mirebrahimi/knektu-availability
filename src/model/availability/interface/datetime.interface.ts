@@ -1,3 +1,5 @@
+import moment from 'moment-timezone';
+
 export interface IDateTime {
   date: IDate;
   time: ITime;
@@ -14,3 +16,5 @@ export interface ISingleDay {
   from: moment.Moment;
   to: moment.Moment;
 }
+
+export type DiaryList = ISingleDay[];
