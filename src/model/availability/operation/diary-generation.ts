@@ -3,7 +3,7 @@ import { CustomDiary } from '../diary/custom';
 import { DailyDiary } from '../diary/daily';
 import { OnceDiary } from '../diary/once';
 import { WeeklyDiary } from '../diary/weekly';
-import { ISingleDay } from '../interface/datetime.interface';
+import { DiaryList, ISingleDay } from '../interface/datetime.interface';
 
 export class DiaryGeneration implements Operation {
   apply(diary: OnceDiary): void;
@@ -16,9 +16,9 @@ export class DiaryGeneration implements Operation {
     });
   }
 
-  private generateDetailsFor(day: ISingleDay): ISingleDay[] {
+  private generateDetailsFor(day: ISingleDay): DiaryList {
     const { from: firstEntry, to: lastEntry } = day;
-    const diaries: ISingleDay[] = [];
+    const diaries: DiaryList = [];
 
     const currentPtr_ = firstEntry.clone();
     while (currentPtr_ < lastEntry) {

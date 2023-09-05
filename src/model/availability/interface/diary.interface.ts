@@ -4,13 +4,13 @@ import { Operation } from './operation.interface';
 
 export interface IDiary {
   type: DiaryType;
-  diaries: ISingleDay[];
+  diaries: DiaryList;
 
   execute(operation: Operation): void;
   fill(data: IDiaryInitialization): void;
 
-  set momentDates(values: ISingleDay[]);
-  get momentDates(): ISingleDay[];
+  set momentDates(values: DiaryList);
+  get momentDates(): DiaryList;
 
   get status(): DiaryStatus;
   set status(status: DiaryStatus);
