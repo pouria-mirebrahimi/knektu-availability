@@ -23,6 +23,10 @@ describe('Once Diary', () => {
     expect(onceAvailability).toBeInstanceOf(Availability);
   });
 
+  it('should be abe to calc the duration', () => {
+    expect(onceAvailability.duration).toBe(120);
+  });
+
   it("availability's diaries is a list of ISingleDays", () => {
     expect(onceDiaries).toHaveLength(4);
   });
