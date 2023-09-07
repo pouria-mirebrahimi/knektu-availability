@@ -2,7 +2,7 @@ import { DiaryGeneration } from './operation/diary-generation';
 import { DiaryValidation } from './operation/diary-validation';
 import { IDiaryInitialization, IDiary } from './interface/diary.interface';
 import { DiaryExtraction } from './operation/diary-extract';
-import { DiaryList } from './interface/datetime.interface';
+import { DiaryList, ISingleDay } from './interface/datetime.interface';
 import { DiaryStatus, DiaryType } from './enum/diary.enum';
 import { collisionUtility } from './utils/collision-util';
 
@@ -31,6 +31,11 @@ export abstract class Availability {
 
   public get diaries(): DiaryList {
     return this.#diary_.diaries;
+  }
+
+  public get duration(): number {
+    const firstDay = this.#diary_.momentDates[0] as ISingleDay;
+    return firstDay.to.diff(firstDay.from, 'minutes');
   }
 
   public get status(): DiaryStatus {
